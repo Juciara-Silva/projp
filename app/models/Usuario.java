@@ -45,5 +45,7 @@ public class Usuario extends Model { // Classe que representa um usuário
 		}
 
 	}
+	
+	
 
 }

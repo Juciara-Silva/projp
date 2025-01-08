@@ -26,21 +26,37 @@ public class Usuarios extends Controller {
 
 	public static void salvar(Usuario usuario) {
 
+		
+
+		usuario.nome = usuario.nome.toUpperCase();
+		usuario.email = usuario.email.toLowerCase();
+		
+		
+		
+		Usuario usuarioExistente = Usuario.find("email = ?1", usuario.email).first();
+	    if (usuarioExistente != null && (usuario.id == null || !usuarioExistente.id.equals(usuario.id))) {
+	        // Se o email já estiver cadastrado e não for o mesmo usuário (edição)
+	        flash.error("Este email já está cadastrado.");
+	        form(usuario.id); // Retorna ao formulário com o usuário
+	        return; // Interrompe a execução do método
+
+	    }
+		
+	
+		
+		
+		
 		String mensagem = "Cadastrado com sucesso!"; // Mensagem padrão para cadastro
 		if (usuario.id != null) { // Verifica se o usuário já existe (edição)
 			mensagem = "Editado com sucesso!"; // Mensagem para edição
 
 		}
-
-		// Converte o nome para maiúsculas e o email para minúsculas
-
-		usuario.nome = usuario.nome.toUpperCase();
-		usuario.email = usuario.email.toLowerCase();
 		
 		usuario.save(); // Salva o usuário no banco de dados
 		flash.success(mensagem); // Exibe mensagem de sucesso
 		listar(null); // Redireciona para a lista de usuários
-
+		
+		
 	}
 
 	// Método para remover um usuário (marcando como inativo)
@@ -94,5 +110,11 @@ public class Usuarios extends Controller {
 		renderTemplate("Usuarios/form.html", usuario); // Renderiza o template de edição
 
 	}
+	
+
+	
+	
+	
+	
 
 }

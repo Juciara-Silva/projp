@@ -7,6 +7,8 @@
     #{set title:'Cadastro de Usuario!!!' /} 
 #{/else}
 
+
+
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Clique aqui para mais opções</button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -16,6 +18,13 @@
         <li><button class="dropdown-item" onclick="window.location='@{Principais.passeio}'">Ir para conhecer os passeios</button></li>
     </ul>
 </div>
+
+
+        ${flash.error}
+        ${flash.success}
+   
+
+
 
 <div class="container mx-auto p-2">
     <div class="d-flex justify-content-center align-items-center vh-100">

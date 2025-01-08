@@ -121,11 +121,21 @@ public class Logins extends Controller {
 			return;
 
 		}
+		
+		Usuario usuario = Usuario.find("email = ?1", email).first();
+	    if (usuario == null) {
+	        flash.error("Email não encontrado. Por favor, verifique e tente novamente.");
+	        form();
+	        return;
+
+	    }
+		
+		
 
 		String usuarioLogado = Usuario.autenticar(email, senha);
 		if (usuarioLogado == null) {
 
-			flash.error("Credenciais inválidas");
+			flash.error("Você não tem cadastro");
 			form();
 		} else {
 
